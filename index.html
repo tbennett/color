@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors</title>
+    <style>
+        :root {
+            --dark: #223;
+            --mid: #888;
+            --light: #eee;
+        }
+
+        div {
+            padding:2rem;
+            aspect-ratio: 4/1;
+            width: 30rem;
+            margin:2rem;
+        }
+
+        .light {
+            background-color: var(--light);
+        }
+        .mid {
+            background-color: var(--mid)
+        }
+        .dark {
+            background-color: var(--dark)
+        }
+    </style>
+    <script src="main2.js"></script>
+</head>
+<body>
+    <div class="light"></div>
+    <div class="mid"></div>
+    <div class="dark"></div>
+</body>
+</html>
