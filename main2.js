@@ -1,4 +1,6 @@
 
+// using asyc functions with await promises to fetch
+//remote data
 async function getColors(url) {
     try {
         let res = await fetch(url);
@@ -8,6 +10,7 @@ async function getColors(url) {
     }
 }
 
+// using the remotely fetched data to style the page elements
 async function renderColors() {
     const light = await getColors('https://x-colors.herokuapp.com/api/random/all?type=light');
 
