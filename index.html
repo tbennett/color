@@ -7,9 +7,10 @@
     <title>Colors</title>
     <style>
         :root {
-            --dark: #223;
-            --mid: #888;
+            --bg: #fff;
             --light: #eee;
+            --mid: #888;
+            --dark: #223;
         }
 
         div {
@@ -19,19 +20,26 @@
             margin:2rem;
         }
 
+        .bg {
+            background-color: var(--light);
+        }
+
         .light {
             background-color: var(--light);
         }
         .mid {
-            background-color: var(--mid)
+            background-color: var(--mid);
         }
         .dark {
-            background-color: var(--dark)
+            background-color: var(--dark);
+            filter: brightness(.3);
+            color:white;
         }
+
     </style>
     <script src="main2.js"></script>
 </head>
-<body>
+<body class="bg">
     <div class="light"></div>
     <div class="mid"></div>
     <div class="dark"></div>

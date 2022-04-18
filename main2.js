@@ -1,6 +1,5 @@
 
-async function getColors() {
-    let url = 'https://x-colors.herokuapp.com/api/random?number=4';
+async function getColors(url) {
     try {
         let res = await fetch(url);
         return await res.json();
@@ -10,18 +9,21 @@ async function getColors() {
 }
 
 async function renderColors() {
-    const colors = await getColors();
-    const color1 = await colors[0].hex;
-    const color2 = colors[1].hex;
-    const color3 = colors[2].hex;
-    const color4 = colors[3].hex;
-    let r = document.querySelector(':root');
-    r.style.setProperty('--dark', color1);
-    r.style.setProperty('--light', color2);
-    r.style.setProperty('--mid', color3);
-    document.body.style.backgroundColor = color4;
+    const light = await getColors('https://x-colors.herokuapp.com/api/random/all?type=light');
 
-    console.log(colors)
+    const random = await getColors('https://x-colors.herokuapp.com/api/random');
+    const dark = await getColors('https://x-colors.herokuapp.com/api/random/all?type=dark');
+
+    const bg = await getColors('https://x-colors.herokuapp.com/api/random/all?type=light');
+
+
+    let r = document.querySelector(':root');
+    r.style.setProperty('--bg', light.hex);
+    r.style.setProperty('--light', light.hex);
+    r.style.setProperty('--mid', random.hex);
+    r.style.setProperty('--dark', dark.hsl);
+    
+    document.body.style.backgroundColor = bg.hex;
 }
 
 renderColors();
