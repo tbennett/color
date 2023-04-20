@@ -1,9 +1,13 @@
-
 // basic remote fetch example
-fetch("https://x-colors.herokuapp.com/api/random")
+
+document.addEventListener('DOMContentLoaded', init);
+
+function init() {
+  fetch("https://www.colr.org/json/color/random")
   .then(response => response.json()) 
   .then(data => {
-    document.body.style.backgroundColor = data.hex;
+    document.body.style.backgroundColor = `#${data.new_color}`;
   }).catch(err => {
     console.error('oops', err.message);
   });
+}
