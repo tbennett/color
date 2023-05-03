@@ -1,7 +1,7 @@
 
 // using asyc functions with await promises to fetch
 //remote data
-async function getColors(url) {
+async function getJson(url) {
     try {
         let res = await fetch(url);
         return await res.json();
@@ -12,21 +12,15 @@ async function getColors(url) {
 
 // using the remotely fetched data to style the page elements
 async function renderColors() {
-    const light = await getColors('https://x-colors.herokuapp.com/api/random/all?type=light');
-
-    const random = await getColors('https://x-colors.herokuapp.com/api/random');
-    const dark = await getColors('https://x-colors.herokuapp.com/api/random/all?type=dark');
-
-    const bg = await getColors('https://x-colors.herokuapp.com/api/random/all?type=light');
-
-
+    const data = await getJson('https://www.colr.org/json/colors/random/5');
+    console.log(data.colors);
     let r = document.querySelector(':root');
-    r.style.setProperty('--bg', light.hex);
-    r.style.setProperty('--light', light.hex);
-    r.style.setProperty('--mid', random.hex);
-    r.style.setProperty('--dark', dark.hsl);
-    
-    document.body.style.backgroundColor = bg.hex;
+    r.style.setProperty('--light', `#${data.colors[0].hex}`);
+    r.style.setProperty('--mid', `#${data.colors[1].hex}`);
+    r.style.setProperty('--dark', `#${data.colors[2].hex}`);
+    r.style.setProperty('--bg', `#${data.colors[3].hex}`);
+
+    document.body.style.backgroundColor = `#${data.colors[4].hex}`
 }
 
 renderColors();
