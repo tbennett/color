@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colors</title>
-    <style>
-        :root {
-            --dark: #223;
-            --mid: #888;
-            --light: #eee;
-            --bg: #bac;
-        }
-        body {
-            background: var(--bg);
-        }
-        div {
-            padding:2rem;
-            aspect-ratio: 4/1;
-            width: 30rem;
-            margin:2rem;
-        }
-        .light {
-            background-color: var(--light);
-        }
-        .mid {
-            background-color: var(--mid)
-        }
-        .dark {
-            background-color: var(--dark)
-        }
-    </style>
-    <script src="main.js" defer></script>
-</head>
-<body>
-    <div class="light"></div>
-    <div class="mid"></div>
-    <div class="dark"></div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Colors</title>
+        <style>
+            :root {
+                --light: #eee;
+                --mid: #888;
+                --dark: #223;
+
+
+            }
+            div {
+                padding:2rem;
+                aspect-ratio: 4/1;
+                width: 30rem;
+                margin:2rem auto;
+                border-radius: 25% 0 25% 0;
+            }
+            .light {
+                background-color: var(--light);
+            }
+            .mid {
+                background-color: var(--mid)
+            }
+            .dark {
+                background-color: var(--dark)
+            }
+
+            .button {
+                padding:.5rem;
+                margin:2rem auto;
+                border-radius: 1rem;
+                width: 10rem;
+                display: block;
+                background-color:rgb(22, 83, 195);
+                color: white;
+                text-decoration: none;
+            }
+        </style>
+        <script src="main3.js"></script>
+    </head>
+    <body>
+        <div class="light"></div>
+        <div class="mid"></div>
+        <div class="dark"></div>
+
+        <a class="button" href="index.html">Get New Color Scheme</a>
+    </body>
 </html>
