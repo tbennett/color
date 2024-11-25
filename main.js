@@ -1,55 +1,64 @@
-// basic remote fetch example
+/**
+ * Fetch color info from a remote API and apply it to the page
+ * hsl color easily allows for adjusting only the brightness of a color
+ * without changing its hue or saturation.
+ *
+ * We can also use JS to dynamically get or set CSS custom properties (variables)
+ * see main2.js so see an async version of this code.
+ */
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  fetch("https://www.colr.org/json/colors/random/80")
-  .then(response => response.json()) 
-  .then(data => {
-    let myColors = [];
-    data.colors.forEach(item => {
-      myColors.push("#" + item.hex);  
-    });
+    const seedColor = getRandomHex();
+    fetch("https://www.thecolorapi.com/scheme?hex=" + seedColor + "&mode=quad&count=4")
+        .then((response) => response.json())
+        .then((data) => {
+            //store and manpulate some of the color's hsl values to be
+            //lighter or darker, then reapply those recalculated values.
+            let bgcolor = data.colors[0].hex.value;
+            let h1 = data.colors[1].hsl.h;
+            let s1 = data.colors[1].hsl.s;
+            let l1 = data.colors[1].hsl.l * 0.4; //make the lightness value darker
+            let h3 = data.colors[3].hsl.h;
+            let s3 = data.colors[3].hsl.s;
+            let l3 = data.colors[3].hsl.l * 1.5; //make the lightness value brighter
 
-    setCSSVariable('--bg', myColors[randomItem(myColors)]);
-    setCSSVariable('--dark',myColors[randomItem(myColors)]);
-    setCSSVariable('--mid', myColors[randomItem(myColors)]);
-    setCSSVariable('--light', myColors[randomItem(myColors)]);
-
-    /*
-    let block1 = document.querySelector('.dark');
-    let block2 = document.querySelector('.mid');
-    let block3 = document.querySelector('.light');
-
-    block1.style.backgroundColor = myColors[3];
-    block2.style.backgroundColor = myColors[6];
-    block3.style.backgroundColor = myColors[0];
-    document.body.style.backgroundColor = myColors[2];
-    */
-
-  }).catch(err => {
-    console.error('oops', err.message);
-  });
-
-
+            document.body.style.backgroundColor = bgcolor;
+            setCSSVariable("--light", `hsl(${h3}, ${s3}%, ${l3}%)`);
+            setCSSVariable("--mid", data.colors[2].hex.value);
+            setCSSVariable("--dark", `hsl(${h1}, ${s1}%, ${l1}%)`);
+        })
+        .catch((err) => {
+            console.error("oops", err.message);
+        });
 }
 
+/**
+ *
+ * Utiliy functions
+ *
+ */
 
 // getting a CSS variable value
 function getCSSVariable(cssPropName) {
-  const cssRoot = document.querySelector(':root');
-  const cssRootInfo = getComputedStyle(cssRoot);
-  const prop = cssRootInfo.getPropertyValue(cssPropName);
-  return prop;
+    const cssRoot = document.querySelector(":root");
+    const cssRootInfo = getComputedStyle(cssRoot);
+    const prop = cssRootInfo.getPropertyValue(cssPropName);
+    return prop;
 }
 
 // setting a CSS variable value
 function setCSSVariable(cssPropName, value) {
-  const cssRoot = document.querySelector(':root');
-  cssRoot.style.setProperty(cssPropName, value);
+    const cssRoot = document.querySelector(":root");
+    cssRoot.style.setProperty(cssPropName, value);
 }
 
-// return a random item from an array
-function randomItem(arrayName) {
-  return Math.floor(Math.random() * arrayName.length);
+function getRandomHex() {
+    var letters = "0123456789ABCDEF".split("");
+    var color = "";
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
