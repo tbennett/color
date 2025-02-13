@@ -4,7 +4,7 @@
  * without changing its hue or saturation.
  *
  * We can also use JS to dynamically get or set CSS custom properties (variables)
- * see main2.js so see an async version of this code.
+ * see main2.js to see an async version of this code.
  */
 
 document.addEventListener("DOMContentLoaded", init);
